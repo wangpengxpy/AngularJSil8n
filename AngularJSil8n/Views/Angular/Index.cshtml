@@ -1,0 +1,48 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html ng-app="app">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-translate.min.js"></script>
+    <script src="~/Scripts/loader-static-files.js"></script>
+    <script src="~/Scripts/angular-sanitize.min.js"></script>
+
+    <script type="text/javascript">
+        var app = angular.module("app", ['pascalprecht.translate', 'ngSanitize']);
+        var test = "<div ng-bind-html='\"hi\" | translate'></div>";
+        app.config(['$translateProvider', function ($translateProvider) {
+            $translateProvider.useStaticFilesLoader({
+                prefix: '/il8n/',
+                suffix: '.json'
+            });
+           
+            $translateProvider.preferredLanguage("zh-cn");
+        }]);
+        app.directive("directive", function () {
+            return {
+                restrice: "AE",
+                replace: true,
+                template: test
+            };
+        })
+        $(function () {
+            $("#a").html(test);
+        });
+    </script>
+</head>
+<body>
+    <h1 ng-bind-html="'hi' | translate"></h1>
+    <h1 ng-bind-html="'git' | translate"></h1>
+    <directive>
+
+    </directive>
+    <div id="a"></div>
+</body>
+</html>
